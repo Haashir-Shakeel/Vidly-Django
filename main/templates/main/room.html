@@ -1,5 +1,5 @@
 {% extends 'main/base.html'%}
-
+{%load static%}
 {%block content%}
 <main>
     <section id="room-name-wrapper">
@@ -29,4 +29,6 @@
     </section>
 
 </main>
+<script type="text/javascript" src="{% static 'assets/AgoraRTC_N-4.10.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/streams.js' %}"></script>
 {%endblock%}
