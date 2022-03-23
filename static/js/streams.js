@@ -1,7 +1,7 @@
 const APP_ID = 'c0b140fce0e844d1b9795dba24e24d3b'
-const CHANNEL = 'newchannel'
-const TOKEN = '006c0b140fce0e844d1b9795dba24e24d3bIAB6h9Rc2EUhcotJyyDxsgHyEokbcBsJCLxtA4uB9WEjuu5RUKM/d3HpIgBO+wQAPuQ8YgQAAQA+5DxiAgA+5DxiAwA+5DxiBAA+5Dxi'
-let UID = 64;
+const CHANNEL = sessionStorage.getItem('room')
+const TOKEN = sessionStorage.getItem('token')
+let UID = Number(sessionStorage.getItem('UID'))
 
 console.log('Stream.js connected')
 
@@ -12,6 +12,9 @@ let remoteUsers={}
 
 let joinAndDisplayLocalStream = async() => {
 
+    //display roomname to make sure session values are working
+    document.getElementById('room-name').innerText = CHANNEL
+
     // subscribe to event listener
     // whenever user publishes their track, handleUserJoined is called
     client.on('user-published', handleUserJoined)
@@ -20,7 +23,13 @@ let joinAndDisplayLocalStream = async() => {
     client.on('user-left',handleUserLeft)
 
     // join channel
-    await client.join(APP_ID,CHANNEL,TOKEN,UID)
+    try{
+        await client.join(APP_ID,CHANNEL,TOKEN,UID)
+    }catch(error){
+        console.error(error)
+        window.open('/','_self')
+    }
+    
 
     // get audio and video tracks
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
