@@ -1,6 +1,6 @@
 const APP_ID = 'c0b140fce0e844d1b9795dba24e24d3b'
 const CHANNEL = 'main'
-const TOKEN = '006c0b140fce0e844d1b9795dba24e24d3bIAAuITf9xxWEuVowwRGULdX/sKe8ounLSWJwEQdKSD6DRWTNKL8AAAAAEABqGbu4Vn07YgEAAQBWfTti'
+const TOKEN = '006c0b140fce0e844d1b9795dba24e24d3bIADS6EblfGgViU3E2amjV/EWsANKnoDhBFdZYsJ/+f4Y8WTNKL8AAAAAEACYlhMNhJM8YgEAAQCEkzxi'
 let UID;
 
 console.log('Stream.js connected')
@@ -110,11 +110,26 @@ let toggleCamera = async(e)=>{
         await localTracks[1].setMuted(false)
         e.target.style.backgroundColor = '#fff'
     }
-    // if camera on already
+    // if on already
     else{
         await localTracks[1].setMuted(true)
         e.target.style.backgroundColor = 'rgb(255,80,80,1)'
     }
+}
+
+//audio on/off in video controls
+let toggleMic = async(e) =>{
+    //if already muted
+    if (localTracks[0].muted){
+        await localTracks[0].setMuted(false)
+        e.target.style.backgroundColor = '#fff'
+    }
+    //if on already
+    else{
+        await localTracks[0].setMuted(true)
+        e.target.style.backgroundColor = 'rgb(255,80,80,1)'
+    }
+
 }
 
 
@@ -125,3 +140,6 @@ document.getElementById('leave-btn').addEventListener('click',leaveAndRemoveLoca
 
 //adding event listener to camera button in video controls
 document.getElementById('camera-btn').addEventListener('click',toggleCamera)
+
+//adding event listener to audio button in video controls
+document.getElementById('mic-btn').addEventListener('click',toggleMic)
