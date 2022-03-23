@@ -16,6 +16,9 @@ let joinAndDisplayLocalStream = async() => {
     // whenever user publishes their track, handleUserJoined is called
     client.on('user-published', handleUserJoined)
 
+    //handling user leave
+    client.on('user-left',handleUserLeft)
+
     // join channel
     UID = await client.join(APP_ID,CHANNEL,TOKEN,null)
 
@@ -38,6 +41,7 @@ let joinAndDisplayLocalStream = async() => {
     await client.publish([localTracks[0],localTracks[1]])
 }
 
+//handling user joining
 let handleUserJoined = async (user,mediaType)=>{
 
     // adding user to remote user
@@ -72,6 +76,15 @@ let handleUserJoined = async (user,mediaType)=>{
     if (mediaType==='audio'){
         user.audioTrack.play()
     }
+}
+
+//handling user leaves
+let handleUserLeft = async(user)=>{
+    //removing leaving user using uid
+    delete remoteUsers[user.uid]
+
+    //removing user from DOM
+    document.getElementById(`user-container-${user.uid}`).remove()
 }
 
 joinAndDisplayLocalStream()
