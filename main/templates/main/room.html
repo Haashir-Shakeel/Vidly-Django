@@ -6,7 +6,25 @@
         <p>Room Name: <span id="room-name"></span></p>
     </section>
 
+    <!-- this is for video players -->
     <section id="video-streams"></section>
+
+    <!-- In Video controls -->
+    <section id="controls-wrapper">
+
+    <div id="icon-wrapper">
+        <img src="{% static 'images/microphone.svg' %}" id="mic-btn" class="control-icon">
+    </div>
+
+    <div id="icon-wrapper">
+        <img src="{% static 'images/video.svg' %}" id="camera-btn" class="control-icon">
+    </div>
+
+    <div id="icon-wrapper">
+        <img src="{% static 'images/leave.svg' %}" id="leave-btn" class="control-icon">
+    </div>
+
+    </section>
 
 </main>
 <script type="text/javascript" src="{% static 'assets/AgoraRTC_N-4.10.1.js' %}"></script>
