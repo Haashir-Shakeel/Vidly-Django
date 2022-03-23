@@ -1,7 +1,7 @@
 const APP_ID = 'c0b140fce0e844d1b9795dba24e24d3b'
-const CHANNEL = 'main'
-const TOKEN = '006c0b140fce0e844d1b9795dba24e24d3bIADS6EblfGgViU3E2amjV/EWsANKnoDhBFdZYsJ/+f4Y8WTNKL8AAAAAEACYlhMNhJM8YgEAAQCEkzxi'
-let UID;
+const CHANNEL = 'newchannel'
+const TOKEN = '006c0b140fce0e844d1b9795dba24e24d3bIAB6h9Rc2EUhcotJyyDxsgHyEokbcBsJCLxtA4uB9WEjuu5RUKM/d3HpIgBO+wQAPuQ8YgQAAQA+5DxiAgA+5DxiAwA+5DxiBAA+5Dxi'
+let UID = 64;
 
 console.log('Stream.js connected')
 
@@ -20,7 +20,7 @@ let joinAndDisplayLocalStream = async() => {
     client.on('user-left',handleUserLeft)
 
     // join channel
-    UID = await client.join(APP_ID,CHANNEL,TOKEN,null)
+    await client.join(APP_ID,CHANNEL,TOKEN,UID)
 
     // get audio and video tracks
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
