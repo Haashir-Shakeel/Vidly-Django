@@ -87,4 +87,23 @@ let handleUserLeft = async(user)=>{
     document.getElementById(`user-container-${user.uid}`).remove()
 }
 
+let leaveAndRemoveLocalStream = async()=>{
+
+    //go through localtracks and stop tracks and close 
+    for(let i = 0; localTracks.length > i; i++){
+        localTracks[i].stop()
+        localTracks[i].close()
+
+    }
+
+    //unsubscribe from chaneel we joined and redirect user back to lobby page
+    await client.leave()    
+    window.open("/","_self")
+
+}
+
+
 joinAndDisplayLocalStream()
+
+//adding event listener to leave button in video controls
+document.getElementById('leave-btn').addEventListener('click',leaveAndRemoveLocalStream)
