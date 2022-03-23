@@ -10,6 +10,11 @@
             <p>A group videochatting application </p>
         </div>
         <form id="form" action="">
+
+            <div class="form-field">
+                <input type="text" name="room" placeholder="Enter a room name..." style="text-transform: uppercase;">
+            </div>
+
             <div class="form-field">
                 <input type="submit" name="" value="Join Stream" id="">
             </div>
@@ -24,7 +29,28 @@
 
     let handleSubmit = async(e) =>{
         e.preventDefault()
-        window.open("{% url 'room' %}",'_self')
+
+        //**getting token from backend and set that into session
+
+        //getting room name from form
+        let room = e.target.room.value.toUpperCase()
+        //making request to get token from backend
+        let response = await fetch(`/get_token/?channel=${room}`)
+        //getting response
+        let data = await response.json()
+
+        //set values in a session
+        let UID = data.uid
+        let token = data.token
+
+        sessionStorage.setItem('UID',UID)
+        sessionStorage.setItem('token',token)
+        sessionStorage.setItem('room',room)
+
+
+
+        //redirecting user to next page
+        window.open('/room/','_self')
     }
 
     form.addEventListener('submit', handleSubmit)
