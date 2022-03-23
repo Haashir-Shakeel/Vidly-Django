@@ -87,6 +87,7 @@ let handleUserLeft = async(user)=>{
     document.getElementById(`user-container-${user.uid}`).remove()
 }
 
+//leave button in video controls
 let leaveAndRemoveLocalStream = async()=>{
 
     //go through localtracks and stop tracks and close 
@@ -102,8 +103,25 @@ let leaveAndRemoveLocalStream = async()=>{
 
 }
 
+//camera on/off in video controls
+let toggleCamera = async(e)=>{
+    //if already muted
+    if (localTracks[1].muted){
+        await localTracks[1].setMuted(false)
+        e.target.style.backgroundColor = '#fff'
+    }
+    // if camera on already
+    else{
+        await localTracks[1].setMuted(true)
+        e.target.style.backgroundColor = 'rgb(255,80,80,1)'
+    }
+}
+
 
 joinAndDisplayLocalStream()
 
 //adding event listener to leave button in video controls
 document.getElementById('leave-btn').addEventListener('click',leaveAndRemoveLocalStream)
+
+//adding event listener to camera button in video controls
+document.getElementById('camera-btn').addEventListener('click',toggleCamera)
