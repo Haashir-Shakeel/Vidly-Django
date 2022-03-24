@@ -17,7 +17,7 @@
             </div>
 
             <div class="form-field">
-                <input type="text" name="userroom" placeholder="Enter your name..." style="text-transform: uppercase;">
+                <input type="text" name="username" placeholder="Enter your name..." style="text-transform: uppercase;">
             </div>
 
             <div class="form-field">
@@ -37,8 +37,9 @@
 
         //**getting token from backend and set that into session
 
-        //getting room name from form
+        //getting room name,username from form
         let room = e.target.room.value.toUpperCase()
+        let name = e.target.username.value
         //making request to get token from backend
         let response = await fetch(`/get_token/?channel=${room}`)
         //getting response
@@ -51,6 +52,7 @@
         sessionStorage.setItem('UID',UID)
         sessionStorage.setItem('token',token)
         sessionStorage.setItem('room',room)
+        sessionStorage.setItem('name',name)
 
 
 
