@@ -36,9 +36,13 @@ let joinAndDisplayLocalStream = async() => {
     // get audio and video tracks
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
 
+    //creating user in db
+    member = await createMember()
+    console.log('member',member)
+
     // create a player
     let player = `<div class="video-container" id="user-container-${UID}">
-                    <div class="username-wrapper"><span class="user-name">My Name</span></div> 
+                    <div class="username-wrapper"><span class="user-name">${member.name}</span></div> 
                     <div class="video-player" id="user-${UID}"></div>
                 </div>`
 
@@ -141,6 +145,23 @@ let toggleMic = async(e) =>{
         e.target.style.backgroundColor = 'rgb(255,80,80,1)'
     }
 
+}
+
+//create user in db
+let createMember = async()=>{
+    let response = await fetch('/create_member/',{
+        method : 'POST',
+        headers : {
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+            'name':NAME,
+            'room_name':CHANNEL,
+            'UID':UID,
+        })
+    })
+    let member = await response.json()
+    return member
 }
 
 
