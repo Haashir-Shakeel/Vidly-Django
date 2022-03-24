@@ -1,10 +1,18 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+
 :root{
     --shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
 }
 
 body{
     background-color: rgba(232, 233 , 239, 1);
+    font-family: 'Roboto', sans-serif;
 }
+
+/* *****LOBBY STYLING***** */
+
+
 
 #logo{
     display: block;
@@ -24,7 +32,53 @@ body{
     transform: translate(-50%,-50%);
 }
 
-/* Room Styling */
+#welcome-message{
+    text-align: center;
+    margin: 20px;
+}
+
+#welcome-message h1{
+    font-size: 36px;
+}
+
+#welcome-message p{
+    font-size: 16px;
+}
+
+.form-field{
+    margin: 20px;
+}
+
+.form-field label{
+    font-size: 16px;
+    line-height: 1.7em;
+}
+
+.form-field input{
+    width: 100%;
+    border: 2px solid rgba(198, 202, 219, 1);
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.form-field input[type='submit']{
+    background-color: rgba(75, 93, 172, 1);
+    border: none;
+}
+
+@media screen and (max-width:450px) {
+    #form-container{
+        width: 95%;
+    }
+
+    #welcome-message h1{
+        font-size: 24px;
+    }
+    
+}
+
+/* ******* Room Styling ***** */
 
 #video-streams{
     display: flex;
