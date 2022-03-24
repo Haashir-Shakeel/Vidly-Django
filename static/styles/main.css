@@ -80,6 +80,11 @@ body{
 
 /* ******* Room Styling ***** */
 
+#room-name-wrapper{
+    text-align: center;
+    font-size: 18px;
+}
+
 #video-streams{
     display: flex;
     flex-wrap: wrap;
@@ -98,7 +103,7 @@ body{
     border-radius: 5px;
     margin: 2px;
     background-color: rgba(198, 202, 219, 1);
-
+    position: relative;
 
 }
 
@@ -107,6 +112,31 @@ body{
     width: 100%;
 }
 
+.video-player > *{
+    border-radius: 5px;
+
+}
+
+.username-wrapper{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+    background-color: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+
+}
+
+@media screen and(max-width:1650px) {
+    .video-container{
+        flex-basis: 300px;
+        min-height: 200px;
+    }
+    
+}
 
 /* Room Styling | in video controls */
 
