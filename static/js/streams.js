@@ -114,7 +114,9 @@ let leaveAndRemoveLocalStream = async()=>{
     }
 
     //unsubscribe from chaneel we joined and redirect user back to lobby page
-    await client.leave()    
+    await client.leave()
+    //deleting member from db
+    deleteMember()  
     window.open("/","_self")
 
 }
@@ -165,10 +167,27 @@ let createMember = async()=>{
     return member
 }
 
+//get user info from db
 let getMember = async(user)=>{
     let response = await fetch(`/get_member/?UID=${user.uid}&room_name=${CHANNEL}`)
     let member = await response.json()
     return member
+}
+
+//delete user from db
+let deleteMember = async()=>{
+    let response = await fetch('/delete_member/',{
+        method : 'POST',
+        headers : {
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+            'name':NAME,
+            'room_name':CHANNEL,
+            'UID':UID,
+        })
+    })
+    let member = await response.json()
 }
 
 
