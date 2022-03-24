@@ -193,6 +193,9 @@ let deleteMember = async()=>{
 
 joinAndDisplayLocalStream()
 
+//deleting member form db when user closes browser/page
+window.addEventListener('beforeunload',deleteMember)
+
 //adding event listener to leave button in video controls
 document.getElementById('leave-btn').addEventListener('click',leaveAndRemoveLocalStream)
 
