@@ -1,8 +1,12 @@
+import json
+from unicodedata import name
 from django.shortcuts import render
 from agora_token_builder import RtcTokenBuilder
 from django.http import JsonResponse
 import random
 import time
+from .models import RoomMember
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def getToken(request):
@@ -29,3 +33,15 @@ def lobby(request):
 
 def room(request):
     return render(request, 'main/room.html')
+
+@csrf_exempt
+def createMember(request):
+    data = json.loads(request.body)
+
+    member,created = RoomMember.objects.get_or_create(
+        name = data['name'],
+        uid = data['UID'],
+        room_name = data['room_name']
+    )
+
+    return JsonResponse({'name':data['name']},safe=False)
