@@ -45,3 +45,12 @@ def createMember(request):
     )
 
     return JsonResponse({'name':data['name']},safe=False)
+
+def getMember(request):
+    uid = request.GET.get('UID')
+    room_name = request.GET.get('room_name')
+
+    member = RoomMember.objects.get(uid=uid,room_name=room_name)
+    name = member.name
+
+    return JsonResponse({'name':name},safe=False)

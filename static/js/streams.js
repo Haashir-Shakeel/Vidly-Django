@@ -37,7 +37,7 @@ let joinAndDisplayLocalStream = async() => {
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
 
     //creating user in db
-    member = await createMember()
+    let member = await createMember()
     console.log('member',member)
 
     // create a player
@@ -73,9 +73,10 @@ let handleUserJoined = async (user,mediaType)=>{
             player.remove()
         }
 
+        let member = await getMember(user)
         // create a player
         player = `<div class="video-container" id="user-container-${user.uid}">
-                    <div class="username-wrapper"><span class="user-name">My Name</span></div> 
+                    <div class="username-wrapper"><span class="user-name">${member.name}</span></div> 
                     <div class="video-player" id="user-${user.uid}"></div>
                 </div>`
 
@@ -160,6 +161,12 @@ let createMember = async()=>{
             'UID':UID,
         })
     })
+    let member = await response.json()
+    return member
+}
+
+let getMember = async(user)=>{
+    let response = await fetch(`/get_member/?UID=${user.uid}&room_name=${CHANNEL}`)
     let member = await response.json()
     return member
 }
